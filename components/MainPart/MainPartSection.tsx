@@ -24,7 +24,7 @@ function MainPartSection() {
 
   return (
     <ColorTransitionWrapper from={fromColor} to={toColor} animate={animate}>
-      MainPartSection
+      MainPartSection1
     </ColorTransitionWrapper>
   );
 }

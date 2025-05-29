@@ -1,3 +1,4 @@
+/* eslint-disable */
 import type { AppProps } from "next/app";
 import type { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import JuniorButton from "../Button/JuniorButton";
+import SeniorButton from "../Button/SeniorButton";
 
-const colors = ["#ff6b6b", "#feca57", "#48dbfb", "#1dd1a1", "#5f27cd"];
+const colors = ["#a0e7e5", "#b4f8c8", "#fbe7c6", "#cdb4db", "#d0f4de"];
 
 function MainPartSection() {
   const [index, setIndex] = useState(0);
@@ -24,7 +26,12 @@ function MainPartSection() {
 
   return (
     <ColorTransitionWrapper from={fromColor} to={toColor} animate={animate}>
-      MainPartSection1
+      <SectionWrapper>
+        <JuniorButton />
+        <SeniorButton />
+        {/* <div>Welcome to Mechatronics and Robotics</div> 
+      <div>Explore our innovative solutions</div> */}
+      </SectionWrapper>
     </ColorTransitionWrapper>
   );
 }
@@ -56,4 +63,13 @@ const ColorTransitionWrapper = styled.div<{
   @media (max-width: 1024px) {
     height: 100vh;
   }
+`;
+
+const SectionWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 120px;
 `;

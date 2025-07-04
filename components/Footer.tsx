@@ -6,40 +6,41 @@ const { Footer } = Layout;
 
 const MainFooterComponent = () => {
   return (
-    <FooterSection>
-      <WrapFooter>
-        <SecFooterLogo alt="" preview={false} src="/Logo/Triple S.png" />
-        <WrapTextFooter>
-          <TextBox>
-            <FooterHead>Service</FooterHead>
-            <FooterDetail>Data Protection</FooterDetail>
-            <FooterDetail>Fraud Prevention</FooterDetail>
-            <FooterDetail>Payment Gateway</FooterDetail>
-            <FooterDetail>Know Your Customer ( KYC )</FooterDetail>
-            <FooterDetail>Education</FooterDetail>
-          </TextBox>
-          <TextBox>
-            <FooterHead>Contacts</FooterHead>
-            <FooterTitle>Phone</FooterTitle>
-            <FooterDetail>+662-9999-9999</FooterDetail>
-            <FooterTitle>Email</FooterTitle>
-            <FooterDetail>triplesinc@gmail.com</FooterDetail>
-            <FooterTitle>Address</FooterTitle>
-            <FooterDetail>
-              5 Ramkhamhaeng 97/1, Ramkhamhaeng Street, Hua Mak, Bangkapi
-              Bangkok, Thailand 10240
-            </FooterDetail>
-          </TextBox>
-        </WrapTextFooter>
-      </WrapFooter>
-      <CreditFooter>
-        <WrapperFooter>
-          <FooterCopyright>
-            © 2024 Triple S Technology. All rights reserved.
-          </FooterCopyright>
-        </WrapperFooter>
-      </CreditFooter>
-    </FooterSection>
+   <FooterSection></FooterSection>
+    // <FooterSection>
+    //   <WrapFooter>
+    //     <SecFooterLogo alt="" preview={false} src="/Logo/Triple S.png" />
+    //     <WrapTextFooter>
+    //       <TextBox>
+    //         <FooterHead>Service</FooterHead>
+    //         <FooterDetail>Data Protection</FooterDetail>
+    //         <FooterDetail>Fraud Prevention</FooterDetail>
+    //         <FooterDetail>Payment Gateway</FooterDetail>
+    //         <FooterDetail>Know Your Customer ( KYC )</FooterDetail>
+    //         <FooterDetail>Education</FooterDetail>
+    //       </TextBox>
+    //       <TextBox>
+    //         <FooterHead>Contacts</FooterHead>
+    //         <FooterTitle>Phone</FooterTitle>
+    //         <FooterDetail>+662-9999-9999</FooterDetail>
+    //         <FooterTitle>Email</FooterTitle>
+    //         <FooterDetail>triplesinc@gmail.com</FooterDetail>
+    //         <FooterTitle>Address</FooterTitle>
+    //         <FooterDetail>
+    //           5 Ramkhamhaeng 97/1, Ramkhamhaeng Street, Hua Mak, Bangkapi
+    //           Bangkok, Thailand 10240
+    //         </FooterDetail>
+    //       </TextBox>
+    //     </WrapTextFooter>
+    //   </WrapFooter>
+    //   <CreditFooter>
+    //     <WrapperFooter>
+    //       <FooterCopyright>
+    //         © 2024 Triple S Technology. All rights reserved.
+    //       </FooterCopyright>
+    //     </WrapperFooter>
+    //   </CreditFooter>
+    // </FooterSection>
   );
 };
 export default MainFooterComponent;
@@ -139,7 +140,7 @@ const FooterSection = styled(Footer)`
   width: 100%;
   background-color: #343434;
   padding: 24px;
-  display: flex;
+  display: none;
   align-items: center;
   flex-direction: column;
   justify-content: center;

@@ -19,7 +19,7 @@ const StyledButton = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 300px;
+  min-width: 500px;
   padding: 10px 20px;
   background-color: #ffb22c;
   color: white;

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Layout from "../../components/Layout/Layout";
-import MainPartSection from "../../components/MainPart/MainPartSection";
+import MainPartSection from "./MainPart/MainPartSection";
 import { NextPageWithLayout } from "./_app";
 import Head from "next/head";
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Layout } from "antd";
 import { Divide as HamburgerDivide } from "hamburger-react";
+import { useRouter } from "next/router";
 
 const { Header } = Layout;
 
@@ -18,15 +19,20 @@ const HeaderComponent: React.FC = () => {
     }
   };
 
+   const router = useRouter();
+
   return (
     <StyledHeader>
       <WrapperHeader>
         <HeadLogo
           alt="logo"
-          onClick={() => scrollToSection("Banner")}
+         onClick={() => router.push("/")}
           src="/logo/MechaLogo.png"
         />
-        <DesktopMenuSection>
+        {/* <NameTag>
+         Department of Mechatronics and Robotics, Rayong Technical College
+        </NameTag> */}
+        {/* <DesktopMenuSection>
           <StyledButton onClick={() => scrollToSection("dataProtection")}>
             Data Protection
           </StyledButton>
@@ -42,9 +48,9 @@ const HeaderComponent: React.FC = () => {
           <StyledButton onClick={() => scrollToSection("education")}>
             Education
           </StyledButton>
-        </DesktopMenuSection>
+        </DesktopMenuSection> */}
 
-        <MobileMenuIcon onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        {/* <MobileMenuIcon onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <HamburgerDivide toggle={setIsMenuOpen} toggled={isMenuOpen} />
         </MobileMenuIcon>
 
@@ -69,7 +75,7 @@ const HeaderComponent: React.FC = () => {
             </MobileMenu>
             <Overlay onClick={() => setIsMenuOpen(false)} />
           </>
-        )}
+        )} */}
       </WrapperHeader>
     </StyledHeader>
   );
@@ -78,6 +84,23 @@ const HeaderComponent: React.FC = () => {
 export default HeaderComponent;
 
 // Style components
+const NameTag = styled.div`
+  font-family: Prompt;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  word-wrap: break-word;
+  @media (max-width: 1024px) {
+    font-size: 22px;
+    line-height: 32px;
+  }
+`
+
 const StyledButton = styled.div`
   display: inline-flex;
   justify-content: center;
@@ -161,7 +184,7 @@ const WrapperHeader = styled.div`
   padding: 16px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   @media (max-width: 1024px) {
   }
 `;
@@ -171,6 +194,7 @@ const HeadLogo = styled.img`
   max-width: 120px;
   height: auto;
   margin: 0;
+  cursor: pointer;
   @media (max-width: 1024px) {
     max-width: 100px;
   }

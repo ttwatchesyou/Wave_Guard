@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Row, Col } from "antd";
-import TomatoRain from "../../../components/Tamato/TomatoRain";
+import TomatoRain from "../../../components/Rain/TomatoRain";
 
 type Props = {};
 

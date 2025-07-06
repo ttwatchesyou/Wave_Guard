@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { Row, Col, Input, Button, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import TomatoRain from "../../../components/Tamato/TomatoRain";
+import TomatoRain from "../../../components/Rain/TomatoRain";
 
 const { TextArea } = Input;
 

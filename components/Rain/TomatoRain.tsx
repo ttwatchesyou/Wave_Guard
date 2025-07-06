@@ -6,11 +6,11 @@ const TomatoRain: React.FC = () => {
 
  useEffect(() => {
   const interval = setInterval(() => {
-    const shouldDrop = Math.random() ; // 50% โอกาสหล่น
+    const shouldDrop = Math.random() ; 
     if (shouldDrop) {
       setTomatoes((prev) => [...prev, Date.now()]);
     }
-  }, 7000);
+  }, 3500);
   return () => clearInterval(interval);
 }, []);
 
@@ -50,5 +50,5 @@ const Tomato = styled.img.attrs(() => ({
   width: 40px;
   height: 40px;
   z-index: 0;
-  animation: ${fall} 7s linear forwards;
+  animation: ${fall} 3.5s linear forwards;
 `;

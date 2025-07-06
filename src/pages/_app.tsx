@@ -39,11 +39,11 @@ function AppWrapper(props: AppPropsWithLayout) {
   useEffect(() => {
     if (loading) return; // รอโหลด token
 
-    const publicPaths = ["/login", "/register"];
+    const publicPaths = ["/Login", "/Register"];
     const path = router.pathname.toLowerCase();
 
     if (!isAuthenticated && !publicPaths.includes(path)) {
-      router.push("/login");
+      router.push("/Login");
     } else {
       setCheckingAuth(false);
     }

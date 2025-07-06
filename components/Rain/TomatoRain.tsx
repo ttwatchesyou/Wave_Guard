@@ -4,15 +4,15 @@ import styled, { keyframes } from "styled-components";
 const TomatoRain: React.FC = () => {
   const [tomatoes, setTomatoes] = useState<number[]>([]);
 
- useEffect(() => {
-  const interval = setInterval(() => {
-    const shouldDrop = Math.random() ; 
-    if (shouldDrop) {
-      setTomatoes((prev) => [...prev, Date.now()]);
-    }
-  }, 3500);
-  return () => clearInterval(interval);
-}, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const shouldDrop = Math.random();
+      if (shouldDrop) {
+        setTomatoes((prev) => [...prev, Date.now()]);
+      }
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <>
@@ -41,7 +41,7 @@ const fall = keyframes`
 `;
 
 const Tomato = styled.img.attrs(() => ({
-  src: "/tomato.png", 
+  src: "/tomato.png",
   alt: "tomato",
 }))<{ left: number }>`
   position: fixed;

@@ -6,7 +6,7 @@ const { Footer } = Layout;
 
 const MainFooterComponent = () => {
   return (
-   <FooterSection></FooterSection>
+    <FooterSection></FooterSection>
     // <FooterSection>
     //   <WrapFooter>
     //     <SecFooterLogo alt="" preview={false} src="/Logo/Triple S.png" />

@@ -41,7 +41,7 @@ const fall = keyframes`
 `;
 
 const Apple = styled.img.attrs(() => ({
-  src: "/apple.png", 
+  src: "/apple.png",
   alt: "green apple",
 }))<{ left: number }>`
   position: fixed;

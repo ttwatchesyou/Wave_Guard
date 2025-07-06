@@ -1,41 +1,43 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import { useRouter } from 'next/router';
-import { Row, Col } from 'antd';
-import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import React, { useState } from "react";
+import styled from "styled-components";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { Row, Col } from "antd";
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 
 const LoginPage = () => {
   const router = useRouter();
-  const [form, setForm] = useState({ studentId: '', password: '' });
+  const [form, setForm] = useState({ studentId: "", password: "" });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: '' });
+    setErrors({ ...errors, [e.target.name]: "" });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let newErrors: { [key: string]: string } = {};
 
-    if (!form.studentId.trim()) newErrors.studentId = 'กรุณากรอกรหัสนักศึกษา';
-    if (!form.password.trim()) newErrors.password = 'กรุณากรอกรหัสผ่าน';
+    if (!form.studentId.trim()) newErrors.studentId = "กรุณากรอกรหัสนักศึกษา";
+    if (!form.password.trim()) newErrors.password = "กรุณากรอกรหัสผ่าน";
 
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 
     try {
-      await axios.post('/api/auth/login', form);
-      router.push('/');
+      await axios.post("/api/auth/login", form);
+      router.push("/");
     } catch (err: any) {
-      setErrors({ general: err.response?.data?.message || 'เข้าสู่ระบบไม่สำเร็จ' });
+      setErrors({
+        general: err.response?.data?.message || "เข้าสู่ระบบไม่สำเร็จ",
+      });
     }
   };
 
   const handleGoToRegister = () => {
-    router.push('/Register');
+    router.push("/Register");
   };
 
   return (
@@ -59,7 +61,7 @@ const LoginPage = () => {
             <PasswordWrapper>
               <Input
                 name="password"
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 placeholder="รหัสผ่าน"
                 value={form.password}
                 onChange={handleChange}
@@ -92,7 +94,7 @@ export default LoginPage;
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: #FFFBDE;
+  background-color: #fffbde;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,14 +104,14 @@ const FormBox = styled.form`
   background: #fff;
   padding: 40px;
   border-radius: 12px;
-  box-shadow:  #1e3271;
+  box-shadow: #1e3271;
   width: 100%;
   max-width: 500px;
   text-align: center;
 
   h2 {
     margin-bottom: 24px;
-    font-family: 'Prompt', sans-serif;
+    font-family: "Prompt", sans-serif;
   }
 
   .ant-row {

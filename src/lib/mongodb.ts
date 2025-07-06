@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable');
+  throw new Error("Please define the MONGODB_URI environment variable");
 }
 
 let cached = (global as any).mongoose;
@@ -19,7 +19,7 @@ async function connectToDatabase() {
 
   if (!cached.promise) {
     cached.promise = mongoose.connect(MONGODB_URI, {
-      dbName: 'ttwatchesyou', // ชื่อตรงนี้ต้องตรงกับใน URI
+      dbName: "ttwatchesyou", // ชื่อตรงนี้ต้องตรงกับใน URI
       bufferCommands: false,
     });
   }

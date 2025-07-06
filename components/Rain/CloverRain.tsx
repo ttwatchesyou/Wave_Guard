@@ -6,7 +6,7 @@ const CloverRain: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const shouldDrop = Math.random(); 
+      const shouldDrop = Math.random();
       if (shouldDrop) {
         setClovers((prev) => [...prev, Date.now()]);
       }

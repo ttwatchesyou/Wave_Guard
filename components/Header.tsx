@@ -19,14 +19,14 @@ const HeaderComponent: React.FC = () => {
     }
   };
 
-   const router = useRouter();
+  const router = useRouter();
 
   return (
     <StyledHeader>
       <WrapperHeader>
         <HeadLogo
           alt="logo"
-         onClick={() => router.push("/")}
+          onClick={() => router.push("/")}
           src="/logo/MechaLogo.png"
         />
         {/* <NameTag>
@@ -99,7 +99,7 @@ const NameTag = styled.div`
     font-size: 22px;
     line-height: 32px;
   }
-`
+`;
 
 const StyledButton = styled.div`
   display: inline-flex;

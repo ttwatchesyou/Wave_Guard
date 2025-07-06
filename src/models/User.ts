@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema } from "mongoose";
 
 export interface IUser extends Document {
   email: string;
@@ -8,7 +8,7 @@ export interface IUser extends Document {
   lastname: string;
   nickname: string;
   age: number;
-  role: 'junior' | 'senior' | 'admin';
+  role: "junior" | "senior" | "admin";
 }
 
 const UserSchema = new Schema<IUser>({
@@ -19,7 +19,8 @@ const UserSchema = new Schema<IUser>({
   lastname: { type: String, required: true },
   nickname: { type: String, required: true },
   age: { type: Number, required: true },
-  role: { type: String, enum: ['junior', 'senior', 'admin'], required: true },
+  role: { type: String, enum: ["junior", "senior", "admin"], required: true },
 });
 
-export default mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+export default mongoose.models.User ||
+  mongoose.model<IUser>("User", UserSchema);

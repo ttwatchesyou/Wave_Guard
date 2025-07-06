@@ -1,13 +1,22 @@
 /* eslint-disable */
 import type { AppProps } from "next/app";
 import type { NextPage } from "next";
-import { ReactElement, ReactNode, useEffect } from "react";
+import {
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useContext,
+  useState,
+} from "react";
 import { useRouter } from "next/router";
 import { ConfigProvider } from "antd";
 import Layout from "../../components/Layout/Layout";
 import theme from "../../theme/themeConfig";
 import "../styles/globals.css";
 import "antd/dist/reset.css";
+import { AuthProvider } from "@/context/authContext";
+import AuthContext from "@/context/authContext";
+import React from "react";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -19,27 +28,41 @@ type AppPropsWithLayout = AppProps & {
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => <Layout>{page}</Layout>);
+  return <>{getLayout(<Component {...pageProps} />)}</>;
+}
 
+function AppWrapper(props: AppPropsWithLayout) {
   const router = useRouter();
+  const { isAuthenticated, loading } = useContext(AuthContext);
+  const [checkingAuth, setCheckingAuth] = useState(true);
 
   useEffect(() => {
-    // ตัวอย่างเช็ค token ใน localStorage
-    const token = localStorage.getItem("token");
+    if (loading) return; // รอโหลด token
 
-    // หน้าไหนที่ไม่ต้อง redirect เช่น login กับ register
-    const publicPaths = ["/Login", "/Register"];
+    const publicPaths = ["/login", "/register"];
+    const path = router.pathname.toLowerCase();
 
-    // ถ้าไม่มี token และไม่ได้อยู่ในหน้า publicPaths ให้ไป login
-    if (!token && !publicPaths.includes(router.pathname)) {
-      router.push("/Login");
+    if (!isAuthenticated && !publicPaths.includes(path)) {
+      router.push("/login");
+    } else {
+      setCheckingAuth(false);
     }
-  }, [router]);
+  }, [isAuthenticated, loading, router]);
+
+  if (loading || checkingAuth) return null; // หรือแสดง loading spinner
 
   return (
     <ConfigProvider theme={theme}>
-      {getLayout(<Component {...pageProps} />)}
+      <MyApp {...props} />
     </ConfigProvider>
   );
 }
 
-export default MyApp;
+// ให้ AuthProvider ครอบ RootApp ทั้งหมด
+export default function RootApp(props: AppPropsWithLayout) {
+  return (
+    <AuthProvider>
+      <AppWrapper {...props} />
+    </AuthProvider>
+  );
+}

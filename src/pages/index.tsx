@@ -1,6 +1,6 @@
 /* eslint-disable */
 import Layout from "../../components/Layout/Layout";
-import MainPartSection from "./MainPart/MainPartSection";
+import MainPartSection from "./dashboard";
 import { NextPageWithLayout } from "./_app";
 import Head from "next/head";
 
@@ -13,7 +13,6 @@ const Home: NextPageWithLayout = () => {
         <link href="/logo/MechaLogo.png" rel="icon" />
         <meta property="og:title" content="Mechatronics and Robotics" />
       </Head>
-      <MainPartSection />
     </>
   );
 };

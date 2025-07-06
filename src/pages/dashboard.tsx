@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import JuniorButton from "../../../components/Button/JuniorButton";
-import SeniorButton from "../../../components/Button/SeniorButton";
+import JuniorButton from "../../components/Button/JuniorButton";
+import SeniorButton from "../../components/Button/SeniorButton";
 import { Row, Col } from "antd";
-import TomatoRain from "../../../components/Rain/TomatoRain";
-import CloverRain from "../../../components/Rain/CloverRain";
-import GreenappleRain from "../../../components/Rain/GreenappleRain";
+import TomatoRain from "../../components/Rain/TomatoRain";
+import CloverRain from "../../components/Rain/CloverRain";
+import GreenappleRain from "../../components/Rain/GreenappleRain";
 
 function MainPartSection() {
   return (

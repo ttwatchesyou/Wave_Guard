@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import connectToDatabase from "../../../lib/mongodb";
 import User from "../../../models/User";
 
@@ -26,9 +27,21 @@ export default async function handler(
       return res.status(401).json({ message: "รหัสผ่านไม่ถูกต้อง" });
     }
 
-    // ส่งข้อมูลบางส่วนกลับไป
+    // ✅ สร้าง JWT token
+    const token = jwt.sign(
+      {
+        id: user._id,
+        studentId: user.studentId,
+        role: user.role,
+      },
+      process.env.JWT_SECRET as string,
+      { expiresIn: "7d" }
+    );
+
+    // ✅ ส่ง token กลับไปด้วย
     return res.status(200).json({
       message: "เข้าสู่ระบบสำเร็จ",
+      token,
       user: {
         id: user._id,
         studentId: user.studentId,

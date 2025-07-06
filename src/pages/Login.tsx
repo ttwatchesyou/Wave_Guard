@@ -55,7 +55,7 @@ const LoginPage = () => {
   }, [token, shouldRedirect, router]);
 
   const handleGoToRegister = () => {
-    router.push("/register");
+    router.push("/Register");
   };
 
   return (

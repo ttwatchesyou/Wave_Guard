@@ -37,19 +37,22 @@ function AppWrapper(props: AppPropsWithLayout) {
   const [checkingAuth, setCheckingAuth] = useState(true);
 
   useEffect(() => {
-    if (loading) return; // รอโหลด token
+    if (loading) return;
 
-    const publicPaths = ["/Login", "/Register"];
+    const publicPaths = ["/login", "/register"];
     const path = router.pathname.toLowerCase();
 
+    // ✅ ป้องกัน redirect ซ้ำ
     if (!isAuthenticated && !publicPaths.includes(path)) {
-      router.push("/Login");
+      if (path !== "/login") {
+        router.replace("/login");
+      }
     } else {
       setCheckingAuth(false);
     }
-  }, [isAuthenticated, loading, router]);
+  }, [isAuthenticated, loading, router.pathname]);
 
-  if (loading || checkingAuth) return null; // หรือแสดง loading spinner
+  if (loading || checkingAuth) return null;
 
   return (
     <ConfigProvider theme={theme}>
@@ -58,7 +61,7 @@ function AppWrapper(props: AppPropsWithLayout) {
   );
 }
 
-// ให้ AuthProvider ครอบ RootApp ทั้งหมด
+// ✅ AuthProvider ครอบ RootApp
 export default function RootApp(props: AppPropsWithLayout) {
   return (
     <AuthProvider>

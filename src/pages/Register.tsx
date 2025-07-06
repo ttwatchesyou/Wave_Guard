@@ -258,6 +258,7 @@ const RegisterPage = () => {
   );
 };
 
+
 export default RegisterPage;
 
 const Wrapper = styled.div`

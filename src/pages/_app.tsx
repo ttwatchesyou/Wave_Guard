@@ -39,13 +39,13 @@ function AppWrapper(props: AppPropsWithLayout) {
   useEffect(() => {
     if (loading) return;
 
-    const publicPaths = ["/login", "/register"];
+    const publicPaths = ["/Login", "/Register"];
     const path = router.pathname.toLowerCase();
 
     // ✅ ป้องกัน redirect ซ้ำ
     if (!isAuthenticated && !publicPaths.includes(path)) {
-      if (path !== "/login") {
-        router.replace("/login");
+      if (path !== "/Login") {
+        router.replace("/Login");
       }
     } else {
       setCheckingAuth(false);

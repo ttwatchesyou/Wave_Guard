@@ -7,12 +7,15 @@ import Head from "next/head";
 const Home: NextPageWithLayout = () => {
   return (
     <>
-      <Head>
-        <title>Mechatronics and Robotics</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link href="/logo/MechaLogo.png" rel="icon" />
-        <meta property="og:title" content="Mechatronics and Robotics" />
-      </Head>
+      <>
+        <Head>
+          <title>Mechatronics and Robotics</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <link href="/logo/MechaLogo.png" rel="icon" />
+          <meta property="og:title" content="Mechatronics and Robotics" />
+        </Head>
+      </>
+      <MainPartSection />
     </>
   );
 };

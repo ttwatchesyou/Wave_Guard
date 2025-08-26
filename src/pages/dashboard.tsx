@@ -1,43 +1,66 @@
 import React from "react";
 import styled from "styled-components";
-import JuniorButton from "../../components/Button/JuniorButton";
-import SeniorButton from "../../components/Button/SeniorButton";
-import { Row, Col } from "antd";
-import TomatoRain from "../../components/Rain/TomatoRain";
-import CloverRain from "../../components/Rain/CloverRain";
-import GreenappleRain from "../../components/Rain/GreenappleRain";
+import GaugeChart from "react-gauge-chart";
+import { useMqttTemp } from "../../hook/useMqttTemp";
 
 function MainPartSection() {
+  const temp = useMqttTemp();
+
   return (
     <MainSection>
-      <TomatoRain />
-      <CloverRain />
-      <GreenappleRain />
       <MainBox>
-        <Title>ยินดีต้อนรับสู่แผนกเมคคาทรอนิกส์และหุ่นยนต์ </Title>
-        <Subtitle>เลือกว่า "คุณคือใคร?" แล้วกดปุ่มได้เลย </Subtitle>
-        <Row gutter={[24, 24]}>
-          <Col xs={24} sm={12} md={8} lg={12}>
-            <JuniorButton />
-          </Col>
-          <Col xs={24} sm={12} md={8} lg={12}>
-            <SeniorButton />
-          </Col>
-        </Row>
+        <Title>ยินดีต้อนรับสู่แผนกเมคคาทรอนิกส์และหุ่นยนต์</Title>
+        <Subtitle>อุณหภูมิจาก MQTT</Subtitle>
+
+        <GaugeWrapper>
+          <GaugeChart
+            id="temp-gauge"
+            nrOfLevels={20}
+            percent={temp ? temp / 100 : 0} // สมมุติ temp สูงสุด 100
+            textColor="#fff"
+            formatTextValue={(val: number) => `${temp ?? 0} °C`}
+            colors={["#00FF00", "#FFBF00", "#FF0000"]}
+          />
+        </GaugeWrapper>
       </MainBox>
-      {/* <CornerImage src="/celebrate.svg" alt="Decoration" /> */}
     </MainSection>
   );
 }
 
 export default MainPartSection;
 
-const CornerImage = styled.img`
-  width: 600px;
+// ================== Styled Components ==================
+
+const MainSection = styled.div`
+  width: 100%;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #fffbde;
+`;
+
+const MainBox = styled.div`
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background-color: #1e3271;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  margin: 20px 0;
+
   @media (max-width: 768px) {
-    width: 80px;
+    padding: 20px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 15px;
   }
 `;
 
@@ -47,46 +70,42 @@ const Title = styled.h1`
   margin-bottom: 16px;
   text-align: center;
   font-family: "Prompt", sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.6rem;
+  }
 `;
 
 const Subtitle = styled.p`
   font-size: 1.25rem;
   color: #ffffffcc;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   text-align: center;
   font-family: "Prompt", sans-serif;
-`;
 
-const MainSection = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background-color: #fffbde;
   @media (max-width: 768px) {
-    padding: 10px;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
   }
 `;
 
-const MainBox = styled.div`
+const GaugeWrapper = styled.div`
   width: 100%;
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background-color: #1e3271;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  margin: 20px 0;
+  max-width: 400px;
+  margin-bottom: 20px;
+
   @media (max-width: 768px) {
-    padding: 10px;
-    margin: 10px 0;
+    max-width: 350px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 300px;
   }
 `;

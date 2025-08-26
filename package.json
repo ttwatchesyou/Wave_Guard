@@ -1,5 +1,5 @@
 {
-  "name": "sairahat",
+  "name": "PumpControlSystem",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -30,12 +30,14 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.34",
     "mongoose": "^8.16.1",
+    "mqtt": "^5.14.0",
     "next": "13.1.1",
     "next-plugin-antd-less": "^1.8.0",
     "pdfmake": "^0.2.5",
     "ramda": "^0.27.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-gauge-chart": "^0.5.1",
     "react-icons": "^5.5.0",
     "react-lottie": "^1.2.3",
     "react-otp-input": "^3.1.1",

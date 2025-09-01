@@ -13,6 +13,7 @@ import {
 
 import { useMqttTemp } from "../../hook/useMqttTemp";
 import { useMqttFlow } from "../../hook/useMqttFlow";
+import { MqttControlButtons } from "../../components/Button/MqttControlButtons";
 
 function MainPartSection() {
   const temp = useMqttTemp();
@@ -91,8 +92,8 @@ function MainPartSection() {
   // thresholds
   const TEMP_WARNING = 70;
   const TEMP_DANGER = 85;
-  const FLOW_LOW = 5;
-  const FLOW_CRITICAL = 2;
+  const FLOW_LOW = 70;
+  const FLOW_CRITICAL = 10;
 
   const tempStatus =
     displayTemp >= TEMP_DANGER
@@ -204,7 +205,7 @@ function MainPartSection() {
                   animate={false}
                   hideText={true}
                 />
-                <FlowValue>{displayFlow.toFixed(1)} °C</FlowValue>
+                <FlowValue>{displayFlow.toFixed(1)} L/min</FlowValue>
               </GaugeWrapper>
               <StatusRow>
                 <StatusDot status={flowStatus} />
@@ -309,6 +310,12 @@ function MainPartSection() {
                 )}
               </AlertList>
             </AlertCard>
+          </Col>
+        </Row>
+        {/* --- เพิ่ม MqttControlButtons --- */}
+        <Row gutter="l">
+          <Col span={12}>
+            <MqttControlButtons />
           </Col>
         </Row>
 

@@ -8,7 +8,7 @@ export function useMqttTemp() {
     const client = connectMQTT();
 
     client.on("message", (topic: string, message: Buffer) => {
-      if (topic === "Pump/Temp") {
+      if (topic === "Wave_Guard/WIND") {
         const value = parseFloat(message.toString());
         setTemp(value);
       }

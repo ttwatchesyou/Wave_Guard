@@ -7,13 +7,7 @@ export function useMqttControl() {
 
   // ฟังก์ชัน publish สำหรับเปิด
   const turnOn = useCallback(() => {
-    publishMQTT("Pump/Control", "ON");
+    publishMQTT("Wave_Guard/control", "LED1");
   }, []);
-
-  // ฟังก์ชัน publish สำหรับปิด
-  const turnOff = useCallback(() => {
-    publishMQTT("Pump/Control", "OFF");
-  }, []);
-
-  return { turnOn, turnOff };
+  return { turnOn };
 }

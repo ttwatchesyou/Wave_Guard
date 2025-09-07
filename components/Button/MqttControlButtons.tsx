@@ -9,15 +9,12 @@ interface MqttControlButtonsProps {
 export const MqttControlButtons: React.FC<MqttControlButtonsProps> = ({
   disableOn,
 }) => {
-  const { turnOn, turnOff } = useMqttControl();
+  const { turnOn } = useMqttControl();
 
   return (
     <ButtonWrapper>
       <Button onClick={turnOn} color="#4CAF50" disabled={disableOn}>
-        เปิด
-      </Button>
-      <Button onClick={turnOff} color="#F44336">
-        ปิด
+        Reset
       </Button>
     </ButtonWrapper>
   );

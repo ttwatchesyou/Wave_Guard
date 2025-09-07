@@ -8,7 +8,7 @@ export function useMqttFlow() {
     const client = connectMQTT();
 
     client.on("message", (topic: string, message: Buffer) => {
-      if (topic === "Pump/Flow") {
+      if (topic === "Wave_Guard/WAVE") {
         const value = parseFloat(message.toString());
         setFlow(value);
       }

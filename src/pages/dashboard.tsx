@@ -10,6 +10,8 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from "recharts";
+import { Statistic, Card } from "antd";
+import { ThunderboltOutlined } from "@ant-design/icons";
 
 import { useMqttTemp } from "../../hook/useMqttTemp";
 import { useMqttFlow } from "../../hook/useMqttFlow";
@@ -163,23 +165,23 @@ function MainPartSection() {
     <MainSection>
       <MainBox>
         <Header>
-          <Title>PLACLOUD DASHBOARD</Title>
-          <Subtitle>Realtime from MQTT (Temp + Flow + Pump)</Subtitle>
+          <Title>WAVE GUARD DASHBOARD</Title>
+          <Subtitle>Realtime from MQTT</Subtitle>
         </Header>
         <Row gutter="l">
           <Col span={12} gutter="l">
             <GaugeCard>
-              <CardTitle>Temperature</CardTitle>
+              <CardTitle>WIND SPEED</CardTitle>
               <GaugeWrapper>
                 <GaugeChart
                   id="temp-gauge"
                   nrOfLevels={20}
-                  percent={Math.max(0, Math.min(1, displayTemp / 100))}
+                  percent={Math.max(0, Math.min(1, displayTemp / 10))}
                   colors={["#00FF00", "#FFBF00", "#FF0000"]}
                   animate={false}
                   hideText={true} // ซ่อนตัวเลขเดิม
                 />
-                <TempValue>{displayTemp.toFixed(1)} °C</TempValue>
+                <TempValue>{displayTemp.toFixed(1)}m/s</TempValue>
               </GaugeWrapper>
               <StatusRow>
                 <StatusDot status={tempStatus} />
@@ -196,27 +198,34 @@ function MainPartSection() {
 
           <Col span={12} gutter="l">
             <GaugeCard>
-              <CardTitle>Flow Rate</CardTitle>
-              <GaugeWrapper>
-                <GaugeChart
-                  id="flow-gauge"
-                  nrOfLevels={20}
-                  percent={Math.max(0, Math.min(1, displayFlow / 100))}
-                  textColor="#fff"
-                  formatTextValue={() => `${displayFlow.toFixed(2)} L/min`}
-                  colors={["#00FF00", "#FFBF00", "#FF0000"]}
-                  animate={false}
-                  hideText={true}
+              <CardTitle>WAVE COUNTING</CardTitle>
+              <GaugeWrapper
+                style={{
+                  minHeight: 180,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Statistic
+                  title={null}
+                  value={displayFlow.toFixed(0)}
+                  prefix={
+                    <ThunderboltOutlined
+                      style={{ color: "#00e6ff", fontSize: 32, marginRight: 8 }}
+                    />
+                  }
+                  suffix="ครั้ง"
+                  valueStyle={{ color: "#fff", fontSize: "3rem" }}
                 />
-                <FlowValue>{displayFlow.toFixed(1)} L/min</FlowValue>
               </GaugeWrapper>
               <StatusRow>
                 <StatusDot status={flowStatus} />
                 <StatusText>
                   {flowStatus === "danger"
-                    ? "Flow ต่ำมาก"
+                    ? "จำนวนคลื่นต่ำมาก"
                     : flowStatus === "warning"
-                    ? "Flow ต่ำ"
+                    ? "จำนวนคลื่นต่ำ"
                     : "ปกติ"}
                 </StatusText>
               </StatusRow>
@@ -228,7 +237,7 @@ function MainPartSection() {
         <Row gutter="l">
           <Col span={12} gutter="l">
             <ChartCard>
-              <CardTitle>Temp Trend</CardTitle>
+              <CardTitle>Wind Trend</CardTitle>
               <ChartArea>
                 <ResponsiveContainer width="100%" height={220}>
                   <LineChart data={tempSeries}>
@@ -250,7 +259,7 @@ function MainPartSection() {
           </Col>
           <Col span={12} gutter="l">
             <ChartCard>
-              <CardTitle>Flow Trend</CardTitle>
+              <CardTitle>Wave Trend</CardTitle>
               <ChartArea>
                 <ResponsiveContainer width="100%" height={220}>
                   <LineChart data={flowSeries}>
@@ -276,24 +285,24 @@ function MainPartSection() {
         <Row gutter="l">
           <Col span={6} gutter="l">
             <SmallCard>
-              <SmallTitle>Latest Temp</SmallTitle>
-              <SmallValue>{displayTemp.toFixed(1)} °C</SmallValue>
+              <SmallTitle>Latest Wind</SmallTitle>
+              <SmallValue>{displayTemp.toFixed(1)} m/s</SmallValue>
               <SmallNote>
-                Threshold: {TEMP_WARNING} / {TEMP_DANGER} °C
+                Threshold: {TEMP_WARNING} / {TEMP_DANGER} m/s
               </SmallNote>
             </SmallCard>
           </Col>
           <Col span={6} gutter="l">
             <SmallCard>
-              <SmallTitle>Latest Flow</SmallTitle>
-              <SmallValue>{displayFlow.toFixed(2)} L/min</SmallValue>
+              <SmallTitle>Latest Wave</SmallTitle>
+              <SmallValue>{displayFlow.toFixed(2)} ครั้ง</SmallValue>
               <SmallNote>
-                Low: {FLOW_LOW} / {FLOW_CRITICAL} L/min
+                Low: {FLOW_LOW} / {FLOW_CRITICAL}ครั้ง
               </SmallNote>
             </SmallCard>
           </Col>
-          <Col span={6} gutter="l">
-            {/* ✅ แสดงสถานะปั๊ม */}
+          {/* <Col span={6} gutter="l">
+            ✅ แสดงสถานะปั๊ม
             <SmallCard>
               <SmallTitle>Pump Status</SmallTitle>
               <SmallValue>
@@ -301,8 +310,8 @@ function MainPartSection() {
               </SmallValue>
               <SmallNote>MQTT: Pump/Status</SmallNote>
             </SmallCard>
-          </Col>
-          <Col span={6} gutter="l">
+          </Col> */}
+          {/* <Col span={6} gutter="l">
             <AlertCard status={getAlertStatus()}>
               <AlertTitle>Alerts</AlertTitle>
               <AlertList>
@@ -323,7 +332,7 @@ function MainPartSection() {
                 )}
               </AlertList>
             </AlertCard>
-          </Col>
+          </Col> */}
         </Row>
 
         {/* --- ปุ่มควบคุม --- */}

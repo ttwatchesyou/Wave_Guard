@@ -2,12 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import { useMqttControl } from "../../hook/useMqttControl";
 
-export const MqttControlButtons: React.FC = () => {
+interface MqttControlButtonsProps {
+  disableOn?: boolean;
+}
+
+export const MqttControlButtons: React.FC<MqttControlButtonsProps> = ({
+  disableOn,
+}) => {
   const { turnOn, turnOff } = useMqttControl();
 
   return (
     <ButtonWrapper>
-      <Button onClick={turnOn} color="#4CAF50">
+      <Button onClick={turnOn} color="#4CAF50" disabled={disableOn}>
         เปิด
       </Button>
       <Button onClick={turnOff} color="#F44336">

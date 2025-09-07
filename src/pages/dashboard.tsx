@@ -13,11 +13,13 @@ import {
 
 import { useMqttTemp } from "../../hook/useMqttTemp";
 import { useMqttFlow } from "../../hook/useMqttFlow";
+import { useMqttStatus } from "../../hook/useMqttStatus";
 import { MqttControlButtons } from "../../components/Button/MqttControlButtons";
 
 function MainPartSection() {
   const temp = useMqttTemp();
   const flow = useMqttFlow();
+  const status = useMqttStatus(); // ✅ สถานะปั๊ม ON/OFF
 
   const [displayTemp, setDisplayTemp] = useState<number>(0);
   const [displayFlow, setDisplayFlow] = useState<number>(0);
@@ -35,7 +37,7 @@ function MainPartSection() {
   >([]);
   const popUpId = useRef<number>(0);
 
-  // smoothing
+  // smoothing Temp
   useEffect(() => {
     if (temp == null) return;
     const factor = 0.12;
@@ -49,6 +51,7 @@ function MainPartSection() {
     return () => clearInterval(interval);
   }, [temp]);
 
+  // smoothing Flow
   useEffect(() => {
     if (flow == null) return;
     const factor = 0.12;
@@ -62,7 +65,7 @@ function MainPartSection() {
     return () => clearInterval(interval);
   }, [flow]);
 
-  // series
+  // series Temp
   useEffect(() => {
     if (temp == null) return;
     const now = new Date();
@@ -76,6 +79,7 @@ function MainPartSection() {
     }
   }, [temp]);
 
+  // series Flow
   useEffect(() => {
     if (flow == null) return;
     const now = new Date();
@@ -101,6 +105,7 @@ function MainPartSection() {
       : displayTemp >= TEMP_WARNING
       ? "warning"
       : "normal";
+
   const flowStatus =
     displayFlow <= FLOW_CRITICAL
       ? "danger"
@@ -158,11 +163,9 @@ function MainPartSection() {
     <MainSection>
       <MainBox>
         <Header>
-          <Title>แผงควบคุม — เมคคาทรอนิกส์ & หุ่นยนต์</Title>
-          <Subtitle>Realtime from MQTT (Temp + Flow)</Subtitle>
+          <Title>PLACLOUD DASHBOARD</Title>
+          <Subtitle>Realtime from MQTT (Temp + Flow + Pump)</Subtitle>
         </Header>
-
-        {/* Row 1 : Gauges */}
         <Row gutter="l">
           <Col span={12} gutter="l">
             <GaugeCard>
@@ -289,7 +292,17 @@ function MainPartSection() {
               </SmallNote>
             </SmallCard>
           </Col>
-          <Col span={12} gutter="l">
+          <Col span={6} gutter="l">
+            {/* ✅ แสดงสถานะปั๊ม */}
+            <SmallCard>
+              <SmallTitle>Pump Status</SmallTitle>
+              <SmallValue>
+                {status === "ON" ? "กำลังทำงาน" : "หยุดทำงาน"}
+              </SmallValue>
+              <SmallNote>MQTT: Pump/Status</SmallNote>
+            </SmallCard>
+          </Col>
+          <Col span={6} gutter="l">
             <AlertCard status={getAlertStatus()}>
               <AlertTitle>Alerts</AlertTitle>
               <AlertList>
@@ -312,10 +325,11 @@ function MainPartSection() {
             </AlertCard>
           </Col>
         </Row>
-        {/* --- เพิ่ม MqttControlButtons --- */}
+
+        {/* --- ปุ่มควบคุม --- */}
         <Row gutter="l">
           <Col span={12}>
-            <MqttControlButtons />
+            <MqttControlButtons disableOn={status === "ON"} />
           </Col>
         </Row>
 
